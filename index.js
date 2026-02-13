@@ -12,6 +12,7 @@ let icons = ["O", "X"]
 io.on("connection", function (socket) {
   console.log("connected to " + socket.id); // a new connection has been created
   let myIcon = icons[playerCount++] // assign O/X to player and advance playerCount
+  io.emit("myIcon", myIcon) // send the icon to the client
   // when the socket gets 'submitMove' it sends 'board' back
   socket.on("submitMove", function (row, col) {
     console.log("played at", row, col)
