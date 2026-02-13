@@ -1,0 +1,67 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #323232;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+canvas {
+  display: block;
+  z-index: 1;
+}
+
+#input {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+#guess {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 10px;
+}
+
+#button {
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+#button:hover {
+  background-color: #45a049;
+}
+
+#results {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 200px;
+  height: 90vh;
+  overflow-y: auto;
+  text-align: right;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#results p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  padding: 5px;
+  border-radius: 4px;
+}
