@@ -6,32 +6,17 @@ const web = exp.listen(3000, function () {
   console.log("Running");
 });
 const io = socketio(web);
-// Every time a web browser requests the webpage a new connection is made.
-// An instance of this code runs for each connection – so secretValue and
-// turns will be specific to the connection
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "] // 9 spaces, will have Os and Xs
+let playerCount = 0
+let icons = ["O", "X"]
 io.on("connection", function (socket) {
-  // a new connection has been created
-  // i.e. a web browser has connected to the server
-  console.log("connected to " + socket.id);
-  let secretValue = Math.floor(Math.random() * 100);
-  console.log("Secret value is " + secretValue);
-  let turns = 0;
-  // when the socket gets 'submitGuess' it sends 'score' back
-  socket.on("submitGuess", function (value) {
-    turns++;
-    console.log(value);
-    if (value == secretValue) {
-      socket.emit("score", { value: value, turns: turns, result: "PERFECT" });
-    }
-    if (value < secretValue) {
-      socket.emit("score", { value: value, turns: turns, result: "LOW" });
-    }
-    if (value > secretValue) {
-      socket.emit("score", { value: value, turns: turns, result: "HIGH" });
-    }
-  });
-  // note when the browser disconnects
-  socket.on("disconnect", function () {
-    console.log(socket.id + " disconnected");
+  console.log("connected to " + socket.id); // a new connection has been created
+  let myIcon = icons[playerCount++] // assign O/X to player and advance playerCount
+  // when the socket gets 'submitMove' it sends 'board' back
+  socket.on("submitMove", function (row, col) {
+    console.log("played at", row, col)
+    // NEEDS DEVELOPMENT HERE
+    board[row * 3 + col] = myIcon
+    io.emit("board", board); // send the board array to client
   });
 });
